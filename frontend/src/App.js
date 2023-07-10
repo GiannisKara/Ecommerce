@@ -2,7 +2,8 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Login from './pages/Login';
 import Signup from './pages/Singup';
 import Home from './pages/Home';
-import Topnav from './components/Topnav';
+import Topnav from './layout/Topnav';
+import Footer from './layout/Footer';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
     <div className="App">
        <Router>
         <Topnav />
+        
         <Routes>
           <Route exact path="/" />
           <Route index element={ <Home /> } />
@@ -17,6 +19,7 @@ function App() {
           <Route path="/pages/Signup" element={<Signup />}/>
         </Routes>
        </Router>
+       <Footer />
     </div>
   
    );
