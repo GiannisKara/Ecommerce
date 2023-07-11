@@ -4,6 +4,7 @@ import Signup from './pages/Singup';
 import Home from './pages/Home';
 import Topnav from './layout/Topnav';
 import Footer from './layout/Footer';
+import Singleproduct from './pages/SingleProduct';
 
 function App() {
   return (
@@ -11,10 +12,10 @@ function App() {
     <div className="App">
        <Router>
         <Topnav />
-        
         <Routes>
           <Route exact path="/" />
           <Route index element={ <Home /> } />
+          <Route path="/pages/SingleProduct" element={<Singleproduct />}></Route>
           <Route path="/pages/Login" element={<Login />}/>
           <Route path="/pages/Signup" element={<Signup />}/>
         </Routes>
