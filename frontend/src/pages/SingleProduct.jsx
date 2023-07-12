@@ -1,4 +1,5 @@
 import tshirt1 from '../images/t-shirt-1.png'
+import { Splide, SplideSlide } from '@splidejs/react-splide';
 
 const Singleproduct = () => {
     return ( 
@@ -6,6 +7,14 @@ const Singleproduct = () => {
           <div className='grid lg:grid-cols-2 grid-cols-1 lg:m-[100px] m-3 text-violet-50'>
            <div  > 
             <img className="h-auto p-3 w-[35rem] " src={tshirt1} />
+            <Splide className='flex flex-row' aria-label="My Favorite Images">
+              <SplideSlide>
+               <img src={tshirt1} alt="Image 1"/>
+              </SplideSlide>
+              <SplideSlide>
+               <img src={tshirt1} alt="Image 2"/>
+              </SplideSlide>
+             </Splide>
            </div>
           <div className='flex flex-col lg:w-[80%] w-[fit-content] text-center '>
           <h1 className='text-[30px] mb-5'>Product1</h1>
