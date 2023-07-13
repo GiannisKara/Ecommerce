@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Topnav from './layout/Topnav';
 import Footer from './layout/Footer';
 import Singleproduct from './pages/SingleProduct';
+import Carousel from './components/Carousel';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/pages/SingleProduct" element={<Singleproduct />}></Route>
           <Route path="/pages/Login" element={<Login />}/>
           <Route path="/pages/Signup" element={<Signup />}/>
+          <Route path='/components/Carousel' element={<Carousel />}/>
         </Routes>
        </Router>
        <Footer />
