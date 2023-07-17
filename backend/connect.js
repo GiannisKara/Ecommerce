@@ -6,7 +6,7 @@ require("dotenv").config();
 // useUnifiedTopology: true,
 //};
 
-const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.zwmxlzq.mongodb.net/?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.zwmxlzq.mongodb.net/Ecommerce?retryWrites=true&w=majority`;
 const connection = mongoose
   .connect(uri) //connectParams)
   .then(() => console.log("Connected to MongoDB"))

@@ -2,14 +2,15 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const db = require("./connect");
-const seedRouter = require("./routes/seedRouter");
+const routes = require("./routes/product");
 
 app.use(cors());
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/api/seed", seedRouter);
+app.use("/api", routes);
 //CRUD  applications
+
 // Stripe Connect
 const stripe = require("stripe")(
   "sk_test_51NSON6L5vCUgJ7hdzHo7QE751lFfVqzKY9vu0It4yyYkuxPQSZq3ijz1geV6rH66f4vKeUf8Q3mfQ0SIRi8ggwBf00vFAM33hS"

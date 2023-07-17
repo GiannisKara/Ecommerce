@@ -7,6 +7,7 @@ import Footer from "./layout/Footer";
 import Singleproduct from "./pages/SingleProduct";
 import Carousel from "./components/Carousel";
 import CartProvider from "./CartConstext";
+import Create from "./pages/Create";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
               path="/pages/SingleProduct"
               element={<Singleproduct />}
             ></Route>
+            <Route path="/pages/Create" element={<Create />}></Route>
             <Route path="/pages/Login" element={<Login />} />
             <Route path="/pages/Signup" element={<Signup />} />
             <Route path="/components/Carousel" element={<Carousel />} />
