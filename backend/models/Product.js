@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
-const productSchema = new mongoose.Schema({
-  stipe: {
+const productSchema = mongoose.Schema({
+  stripe: {
     type: String,
     required: true,
-    unique: true,
+    
   },
   title: {
     type: String,

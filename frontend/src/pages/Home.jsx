@@ -10,7 +10,7 @@ const Home = () => {
         <div className="flex flex-col left-0 min-w-[fit-content] ">
           <div className="bg-violet-500 bg-opacity-25 rounded p-10 lg:text-[20px] sm:w-[fit-content] text-[13px]">
             <h2 className="pb-6 text-violet-50">Categories</h2>
-            <ul className="list-none">
+            <ul className="list-none ">
               <li className="pb-5">
                 <Link
                   className="text-violet-50 transition ease-in-out delay-0 hover:text-violet-600 duration-700"
@@ -48,7 +48,7 @@ const Home = () => {
         </div>
 
         <div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 overflow-y-hidden">
             {ProductArray.map((product, idx) => (
               <div className="flex justify-center" key={idx}>
                 <ProductCard product={product} />

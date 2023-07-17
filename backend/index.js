@@ -41,6 +41,9 @@ app.post("/checkout", async (req, res) => {
   );
 });
 
+//require routes
+app.use('/', require ("./routes/product"))
+
 // start the Express server
 const PORT = process.env.PORT || 5050;
 app.listen(PORT, () => {

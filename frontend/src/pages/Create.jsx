@@ -32,7 +32,7 @@ const Create = () => {
     };
 
     axios.post("http://localhost:5050/create", newProduct);
-    // Handle navigation and reload here
+    window.location.reload();
   };
 
   return (
@@ -41,10 +41,10 @@ const Create = () => {
         <h1 className="text-dark text-4xl">CREATE</h1>
       </div>
 
-      <form className="flex flex-col border border-dark border-2 rounded mx-auto p-5 w-75 mt-5 text-dark bg-primary bg-opacity-75">
+      <form className="flex flex-col border border-dark  rounded mx-auto p-5 w-75 mt-5 text-dark bg-primary bg-opacity-75">
         <div className="mb-3">
           <label htmlFor="stripe" className="form-label">
-            stipe
+            stripe
           </label>
           <input
             name="stripe"
