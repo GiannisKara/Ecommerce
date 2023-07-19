@@ -22,11 +22,28 @@ module.exports = {
       '900': '#601c87',
       '950': '#420764',
   },
+  'red': {
+    '50': '#fff0f0',
+    '100': '#ffdede',
+    '200': '#ffc3c3',
+    '300': '#ff9a9a',
+    '400': '#ff6060',
+    '500': '#ff2f2f',
+    '600': '#ed0c0c',
+    '700': '#cd0808',
+    '800': '#a90b0b',
+    '900': '#8b1111',
+    '950': '#4c0303',
+},
+
 },
     extend: {},
   },
 variants: {
  backgroundColor:['responsive','hover','focus','active']
 }, 
-  plugins: [  require('flowbite/plugin') ],
+  plugins: [  
+    require('flowbite/plugin'),
+    require('tailwind-scrollbar'),                
+  ],
 }
