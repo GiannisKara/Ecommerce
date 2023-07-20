@@ -12,7 +12,7 @@ function Create() {
     e.preventDefault();
     try {
       alert("Product added to DataBase");
-      await axios.post("http://localhost:5050/", {
+      await axios.post(process.env.CONNECT_URI, {
         StripeKey,
         Name,
         Price,
@@ -73,15 +73,16 @@ function Create() {
           cols="30"
           rows="10"
         ></textarea>
-        <textarea
+        <select
           name="Category"
           onChange={(e) => {
             setCategory(e.target.value);
           }}
-          placeholder="Enter Product's Category"
-          cols="30"
-          rows="10"
-        ></textarea>
+        >
+          <option value="Tshirt">Tshirt</option>
+          <option value="Jean">Jean</option>
+          <option value="Shoes">Shoes</option>
+        </select>
 
         <input type="submit" onClick={submit} value="submit"></input>
       </form>

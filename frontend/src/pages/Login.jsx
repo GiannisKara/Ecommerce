@@ -1,4 +1,4 @@
-import axios from "axios";
+//import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -8,25 +8,27 @@ const Login = () => {
   const [email, setEmail] = useState();
   async function submit(e) {
     e.preventDefault();
-    try {
-      await axios
-        .post("http://localhost:5050/singin", {
-          email,
-          password,
-        })
-        .then((res) => {
-          if (res.Userdata === "exist") {
-            navigate("/", { state: { id: email } }); //<h1>Welcome {location.state.id}<h1>
-          } else if (res.Userdata === "not exist") {
-            alert("User have not sing up");
-          }
-        })
-        .catch((e) => {
-          alert("wrong details");
-        });
-    } catch (e) {
-      console.log(e);
-    }
+    fetch("http://localhost:5050/singin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: email, password: password }),
+    })
+      .then((response) => response.json())
+      .then((res) => {
+        if (res === "exist") {
+          // Email exists in the database, navigate to the desired location
+          navigate("/", { state: { id: email } }); //<h1>Welcome {location.state.id}<h1>
+        } else {
+          // Email does not exist in the database
+          alert("User has not signed up");
+        }
+      })
+      .catch((e) => {
+        // An error occurred while making the API call
+        alert("An error occurred. Please try again later.");
+      });
   }
   return (
     <div className="min-h-screen min-w-screen bg-gradient-to-r from-violet-200 to-violet-400 p-20">

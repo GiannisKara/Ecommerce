@@ -1,4 +1,4 @@
-import axios from "axios";
+//import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -9,20 +9,24 @@ const Signup = () => {
   async function submit(e) {
     e.preventDefault();
     try {
-      await axios
-        .post("http://localhost:5050/singup", {
-          email,
-          password,
-        })
+      fetch(`http://localhost:5050/singup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      })
+        .then((response) => response.json())
         .then((res) => {
+          // Access the 'Userdata' property from the response object
           if (res.Userdata === "exist") {
-            alert("User already exist");
+            alert("User already exists");
           } else if (res.Userdata === "not exist") {
-            navigate("/", { state: { id: email } }); //<h1>Welcome {location.state.id}<h1>
+            navigate("/", { state: { id: email } }); // Replace this with your navigation logic
           }
         })
         .catch((e) => {
-          alert("wrong details");
+          alert("An error occurred. Please try again later.");
         });
     } catch (e) {
       console.log(e);
