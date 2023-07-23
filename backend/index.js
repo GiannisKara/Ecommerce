@@ -11,19 +11,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 //CRUD  applications
 //Product
-app.post("/", async (req, res) => {
-  const { StripeKey, Name, Price, Description, CountInStock, Category } =
-    req.body;
-  const Productdata = {
-    StripeKey: StripeKey,
-    Name: Name,
-    Price: Price,
-    Description: Description,
-    CountInStock: CountInStock,
-    Category: Category,
-  };
-  await Product.insertMany([Productdata]);
-});
+//app.post("/", async (req, res) => {
+//  const { StripeKey, Name, Price, Description, CountInStock, Category } =
+//    req.body;
+//  const Productdata = {
+//    StripeKey: StripeKey,
+//    Name: Name,
+//    Price: Price,
+//    Description: Description,
+//    CountInStock: CountInStock,
+//    Category: Category,
+//  };
+//  await Product.insertMany([Productdata]);
+//});
+
+app.use('/',require("./routes/product"));
+
 //CRUD  applications
 //User Log In
 app.post("/singin", async (req, res) => {
