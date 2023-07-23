@@ -1,90 +1,106 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Create() {
-  const [StripeKey, setStripeKey] = useState("");
-  const [Name, setName] = useState("");
-  const [Price, setPrice] = useState();
-  const [Description, setDescription] = useState("");
-  const [CountInStock, setCountInStock] = useState("");
-  const [Category, setCategory] = useState("");
-  let submit = async (e) => {
-    e.preventDefault();
-    try {
-      alert("Product added to DataBase");
-      await axios.post(process.env.CONNECT_URI, {
-        StripeKey,
-        Name,
-        Price,
-        Description,
-        CountInStock,
-        Category,
-      });
-    } catch (e) {
-      console.log(e);
+  const [Category, setCategory] = useState("Shoes");
+  const navigate = useNavigate();
+  const [input, setInput]= useState({
+    StripeKey:"",
+    Name:"",
+    Price:"",
+    Description:"",
+    CountInStock:"",
+    Category:"",
+  })
+
+ const handleChange = (e) =>{
+  const {name, value} = e.target;
+
+  setInput(prevInput =>{
+      return {
+      ...prevInput,
+      [name]: value,
     }
-  };
+  })
+}
+
+ const handleSubmit = (e) => {
+    e.preventDefault();
+    const newProduct = {
+      StripeKey:input.StripeKey,
+      Name:input.Name,
+      Price:input.Price,
+      Description:input.Description,
+      CountInStock:input.CountInStock,
+      Category:Category,
+     }
+
+     axios.post('http://localhost:5050/create' , newProduct)
+     navigate("/")
+     window.location.reload();
+ }
 
   return (
     <div>
       <form action="POST">
         <textarea
-          name="Stripe"
-          onChange={(e) => {
-            setStripeKey(e.target.value);
-          }}
-          placeholder="Enter Product's Stripe key"
-          cols="30"
-          rows="10"
+             name="StripeKey"
+             value={input.StripeKey}  
+             onChange={handleChange}    
+             className='resize-none' 
+             type="StripeKey"                          
+             placeholder="StripeKey" 
+             required   
         ></textarea>
         <textarea
           name="Name"
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
-          placeholder="Enter Product's Name"
-          cols="30"
-          rows="10"
+          value={input.Name}  
+          onChange={handleChange}    
+          className='resize-none' 
+          type="Name"                          
+          placeholder="Name" 
+          required
         ></textarea>
         <textarea
           name="Price"
-          onChange={(e) => {
-            setPrice(e.target.value);
-          }}
-          placeholder="Enter Product's Price"
-          cols="30"
-          rows="10"
+          value={input.Price}  
+          onChange={handleChange}    
+          className='resize-none' 
+          type="Price"                          
+          placeholder="Price" 
+          required
         ></textarea>
         <textarea
           name="Description"
-          onChange={(e) => {
-            setDescription(e.target.value);
-          }}
-          placeholder="Enter Product's Description"
-          cols="30"
-          rows="10"
+          value={input.Description}  
+          onChange={handleChange}    
+          className='resize-none' 
+          type="Description"                          
+          placeholder="Description" 
+          required
         ></textarea>
         <textarea
-          name="CountInStock"
-          onChange={(e) => {
-            setCountInStock(e.target.value);
-          }}
-          placeholder="Enter Product's Quantity"
-          cols="30"
-          rows="10"
+             name="CountInStock"
+             value={input.CountInStock}  
+             onChange={handleChange}    
+             className='resize-none' 
+             type="CountInStock"                          
+             placeholder="CountInStock" 
+             required
         ></textarea>
         <select
-          name="Category"
-          onChange={(e) => {
+           value={Category}
+           onChange={(e) => {
             setCategory(e.target.value);
-          }}
+           }}
         >
           <option value="Tshirt">Tshirt</option>
           <option value="Jean">Jean</option>
           <option value="Shoes">Shoes</option>
         </select>
 
-        <input type="submit" onClick={submit} value="submit"></input>
+        <button type="submit" className="m-5 p-1 border-2 border-violet-700" onClick={handleSubmit} value="submit">Submit</button>
       </form>
     </div>
   );
