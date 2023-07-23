@@ -16,8 +16,8 @@ const Login = () => {
         if (res.data.status === "OK") {
           if (res.data.role === "admin") {
             navigate("/pages/Dashboard");
-          } else {
-            navigate("/");
+          } else if (res.data.status === "OK") {
+            navigate("/", { state: { id: res.data.name } });
           }
         }
       })

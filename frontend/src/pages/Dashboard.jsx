@@ -24,7 +24,7 @@ const Dashboard = () => {
       {suc === "Successed" ? (
         <h1>Welcome to the Dashboard!</h1>
       ) : (
-        <h1>Access denied. Please log in.</h1>
+        <h1>Access denied. Please log in as admin.</h1>
       )}
     </div>
   );

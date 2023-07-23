@@ -5,13 +5,18 @@ import { Link, useNavigate } from "react-router-dom";
 const Signup = () => {
   const [password, setPassword] = useState();
   const [email, setEmail] = useState();
+  const [name, setName] = useState();
   const navigate = useNavigate();
   const submit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:5050/singup", { email, password })
+      .post("http://localhost:5050/singup", { name, email, password })
       .then((res) => {
-        navigate("/pages/Login");
+        if (res.data.status === "USER ALREADY EXIST") {
+          alert("user already exist");
+        } else {
+          navigate("/pages/Login");
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -26,6 +31,16 @@ const Signup = () => {
         </h1>
 
         <form onSubmit={submit} className="flex flex-col content-center ">
+          <input
+            className="w-[100%] mx-auto m-5 p-1 border-2 border-violet-800 rounded bg-violet-300 text-violet-50 placeholder-violet-50 text-[17px]"
+            type="name"
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+            placeholder="Name"
+            name="name"
+            id="name"
+          />
           <input
             className="w-[100%] mx-auto m-5 p-1 border-2 border-violet-800 rounded bg-violet-300 text-violet-50 placeholder-violet-50 text-[17px]"
             type="email"

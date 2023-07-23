@@ -2,13 +2,12 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 const db = require("./connect");
 const cookieParser = require("cookie-parser");
-const Product = require("./models/Product");
-const User = require("./models/User");
 require("dotenv").config();
+const users = require("./routes/user");
+const auth = require("./routes/auth");
+const product = require("./routes/product");
 //APP DEPENTENCES
 app.use(
   cors({
@@ -21,86 +20,9 @@ app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-//CRUD  applications
-//Product
-//app.post("/", async (req, res) => {
-//  const { StripeKey, Name, Price, Description, CountInStock, Category } =
-//    req.body;
-//  const Productdata = {
-//    StripeKey: StripeKey,
-//    Name: Name,
-//    Price: Price,
-//    Description: Description,
-//    CountInStock: CountInStock,
-//    Category: Category,
-//  };
-//  await Product.insertMany([Productdata]);
-//});
-
-app.use("/", require("./routes/product"));
-
-//CRUD  applications
-//User Log In
-app.post("/login", (req, res) => {
-  const { email, password } = req.body;
-
-  User.findOne({ email: email }).then((user) => {
-    if (user) {
-      bcrypt.compare(password, user.password, (err, response) => {
-        if (response) {
-          const token = jwt.sign(
-            { email: user.email, role: user.role },
-            "secret-key",
-            { expiresIn: "2d" }
-          );
-          res.cookie("token", token);
-
-          return res.json({ status: "OK", role: user.role });
-        } else {
-          return res.json("Incorrect password");
-        }
-      });
-    } else {
-      return res.json("User not exists");
-    }
-  });
-});
-//User Sing Up
-app.post("/singup", (req, res) => {
-  const { email, password } = req.body;
-  bcrypt
-    .hash(password, 10)
-    .then((hash) => {
-      User.create({ email, password: hash })
-        .then((user) => res.json({ status: "OK" }))
-        .catch((err) => res.json(err));
-    })
-    .catch((err) => res.json(err));
-});
-
-//DASHBOARD
-const verifyUser = (req, res, next) => {
-  const token = req.cookies.token;
-  if (!token) {
-    return res.status(401).json("Token is missing");
-  } else {
-    jwt.verify(token, "secret-key", (err, decoded) => {
-      if (err) {
-        return res.status(401).json("Error with token");
-      } else {
-        if (decoded.role === "admin") {
-          next();
-        } else {
-          return res.status(403).json("No admin access");
-        }
-      }
-    });
-  }
-};
-
-app.get("/dashboard", verifyUser, (req, res) => {
-  res.json("Success");
-});
+app.use(users);
+app.use(auth);
+app.use(product);
 
 // Stripe Connect
 const stripe = require("stripe")(process.env.STRIPE_URI);
