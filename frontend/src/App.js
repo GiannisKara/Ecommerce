@@ -8,6 +8,7 @@ import Singleproduct from "./pages/SingleProduct";
 import Carousel from "./components/Carousel";
 import CartProvider from "./CartConstext";
 import Create from "./pages/Create";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
               element={<Singleproduct />}
             ></Route>
             <Route path="/pages/Create" element={<Create />}></Route>
+            <Route path="/pages/Dashboard" element={<Dashboard />} />
             <Route path="/pages/Login" element={<Login />} />
             <Route path="/pages/Signup" element={<Signup />} />
             <Route path="/components/Carousel" element={<Carousel />} />

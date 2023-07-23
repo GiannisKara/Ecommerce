@@ -8,7 +8,15 @@ const userschema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  role: {
+    type: String,
+    default: "user",
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
-const User = mongoose.model("Post", userschema);
+const User = mongoose.model("users", userschema);
 module.exports = User;

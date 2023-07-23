@@ -1,14 +1,26 @@
+//REQUIRES
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const db = require("./connect");
+const cookieParser = require("cookie-parser");
 const Product = require("./models/Product");
 const User = require("./models/User");
-
-app.use(cors());
+require("dotenv").config();
+//APP DEPENTENCES
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+);
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 //CRUD  applications
 //Product
 app.post("/", async (req, res) => {
@@ -26,42 +38,68 @@ app.post("/", async (req, res) => {
 });
 //CRUD  applications
 //User Log In
-app.post("/singin", async (req, res) => {
+app.post("/login", (req, res) => {
   const { email, password } = req.body;
-  try {
-    const check = await User.findOne({ email: email });
-    if (check) {
-      res.json("exist");
+
+  User.findOne({ email: email }).then((user) => {
+    if (user) {
+      bcrypt.compare(password, user.password, (err, response) => {
+        if (response) {
+          const token = jwt.sign(
+            { email: user.email, role: user.role },
+            "secret-key",
+            { expiresIn: "2d" }
+          );
+          res.cookie("token", token);
+
+          return res.json({ status: "OK", role: user.role });
+        } else {
+          return res.json("Incorrect password");
+        }
+      });
     } else {
-      res.json("not exist");
+      return res.json("User not exists");
     }
-  } catch (e) {
-    res.json("not exist");
-  }
+  });
 });
 //User Sing Up
-app.post("/singup", async (req, res) => {
+app.post("/singup", (req, res) => {
   const { email, password } = req.body;
-  const Userdata = {
-    email: email,
-    password: password,
-  };
-  try {
-    const check = await User.findOne({ email: email });
-    if (check) {
-      res.json("exist");
-    } else {
-      res.json("not exist");
-      await User.insertMany([Userdata]);
-    }
-  } catch (e) {
-    res.json("not exist");
-  }
+  bcrypt
+    .hash(password, 10)
+    .then((hash) => {
+      User.create({ email, password: hash })
+        .then((user) => res.json({ status: "OK" }))
+        .catch((err) => res.json(err));
+    })
+    .catch((err) => res.json(err));
 });
+
+//DASHBOARD
+const verifyUser = (res, req, next) => {
+  const token = req.cookie.token;
+  if (!token) {
+    return res.json("Token is missing");
+  } else {
+    jwt.verify(token, "secret-key", (err, decoded) => {
+      if (err) {
+        return res.json("Error with token");
+      } else {
+        if (decoded.role === "admin") {
+          next();
+        } else {
+          return res.json("No admin access");
+        }
+      }
+    });
+  }
+};
+app.get("/dashboard", verifyUser, (res, req) => {
+  res.json("Success");
+});
+
 // Stripe Connect
-const stripe = require("stripe")(
-  "sk_test_51NSON6L5vCUgJ7hdzHo7QE751lFfVqzKY9vu0It4yyYkuxPQSZq3ijz1geV6rH66f4vKeUf8Q3mfQ0SIRi8ggwBf00vFAM33hS"
-);
+const stripe = require("stripe")(process.env.STRIPE_URI);
 
 app.post("/checkout", async (req, res) => {
   console.log(req.body);
