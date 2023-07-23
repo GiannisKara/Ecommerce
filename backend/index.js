@@ -37,7 +37,7 @@ app.use(cookieParser());
 //  await Product.insertMany([Productdata]);
 //});
 
-app.use('/',require("./routes/product"));
+app.use("/", require("./routes/product"));
 
 //CRUD  applications
 //User Log In
@@ -79,25 +79,26 @@ app.post("/singup", (req, res) => {
 });
 
 //DASHBOARD
-const verifyUser = (res, req, next) => {
-  const token = req.cookie.token;
+const verifyUser = (req, res, next) => {
+  const token = req.cookies.token;
   if (!token) {
-    return res.json("Token is missing");
+    return res.status(401).json("Token is missing");
   } else {
     jwt.verify(token, "secret-key", (err, decoded) => {
       if (err) {
-        return res.json("Error with token");
+        return res.status(401).json("Error with token");
       } else {
         if (decoded.role === "admin") {
           next();
         } else {
-          return res.json("No admin access");
+          return res.status(403).json("No admin access");
         }
       }
     });
   }
 };
-app.get("/dashboard", verifyUser, (res, req) => {
+
+app.get("/dashboard", verifyUser, (req, res) => {
   res.json("Success");
 });
 
