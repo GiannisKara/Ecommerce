@@ -24,19 +24,20 @@ function Create() {
       };
     });
   };
+  const [file, setfile] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newProduct = {
-      StripeKey: input.StripeKey,
-      Name: input.Name,
-      Price: input.Price,
-      Description: input.Description,
-      CountInStock: input.CountInStock,
-      Category: Category,
-    };
+    const formData = new FormData();
+    formData.append("StripeKey", input.StripeKey);
+    formData.append("Name", input.Name);
+    formData.append("Price", input.Price);
+    formData.append("Description", input.Description);
+    formData.append("CountInStock", input.CountInStock);
+    formData.append("Category", Category);
+    formData.append("file", file);
     axios
-      .post("http://localhost:5050/create", newProduct)
+      .post("http://localhost:5050/create", formData)
       .then((response) => {
         // Handle the response if needed
         // For example, you can check if the product was successfully created
@@ -112,7 +113,7 @@ function Create() {
           <option value="Jean">Jean</option>
           <option value="Shoes">Shoes</option>
         </select>
-
+        <input type="file" onChange={(e) => setfile(e.target.files[0])} />
         <button
           type="submit"
           className="m-5 p-1 border-2 border-violet-700"
