@@ -15,7 +15,7 @@ const Login = () => {
       .then((res) => {
         if (res.data.status === "OK") {
           if (res.data.role === "admin") {
-            navigate("/pages/Dashboard");
+            navigate("/Dashboard");
           } else if (res.data.status === "OK") {
             navigate("/", { state: { id: res.data.name } });
           }
@@ -32,7 +32,7 @@ const Login = () => {
           Log-In
         </h1>
 
-        <form onSubmit={submit} className="flex flex-col content-center ">
+        <form  className="flex flex-col content-center ">
           <input
             className="w-[100%] mx-auto m-5 p-1 border-2 border-violet-800 rounded bg-violet-300 text-violet-50 placeholder-violet-50 text-[17px]"
             type="email"
@@ -53,9 +53,10 @@ const Login = () => {
             name="password"
             id="password"
           />
-          <button
+          <button 
             className="w-[55%] mx-auto m-10 p-1 border-2 border-violet-800  bg-violet-500 rounded text-violet-50 text-[20px] transition ease-in-out delay-0 hover:bg-violet-950 hover:border-violet-50 duration-700  "
             type="submit"
+            onSubmit={submit}
           >
             Log-In
           </button>
@@ -65,7 +66,7 @@ const Login = () => {
           >
             Don't have an account?
           </Link>
-        </form>
+        </form >
       </div>
     </div>
   );

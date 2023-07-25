@@ -9,6 +9,7 @@ import Carousel from "./components/Carousel";
 import CartProvider from "./CartConstext";
 import Create from "./pages/Create";
 import Dashboard from "./pages/Dashboard";
+import TshirtList from "./pages/TshirtList";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="/pages/Login" element={<Login />} />
             <Route path="/pages/Signup" element={<Signup />} />
             <Route path="/components/Carousel" element={<Carousel />} />
+            <Route path="/pages/TshirtList" element={<TshirtList />} />
           </Routes>
         </Router>
       </CartProvider>
