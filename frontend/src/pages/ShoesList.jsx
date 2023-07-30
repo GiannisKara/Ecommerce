@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Filters from "../components/Filter";
 
-const TshirtList = () => {
+const ShoesList = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -18,9 +18,9 @@ const TshirtList = () => {
   return (
     <div className="bg-gradient-to-r from-violet-200 to-violet-400">
       <Filters />
-      <ProductList products={products.filter((product)=>product.Category === 'Tshirt')} />
+      <ProductList products={products.filter((product)=>product.Category === 'Shoes')} />
     </div>
   );
 };
 
-export default TshirtList;
+export default ShoesList;

@@ -14,7 +14,7 @@ const Home = () => {
               <li className="pb-5">
                 <Link
                   className="text-violet-50 transition ease-in-out delay-0 hover:text-violet-600 duration-700"
-                  to="/"
+                  to="/pages/TshirtList"
                 >
                   T-shirts
                 </Link>
@@ -22,7 +22,7 @@ const Home = () => {
               <li className="pb-5">
                 <Link
                   className="text-violet-50 transition ease-in-out delay-0 hover:text-violet-600 duration-700"
-                  to="/"
+                  to="/pages/JeansList"
                 >
                   Jeans
                 </Link>
@@ -30,7 +30,7 @@ const Home = () => {
               <li className="pb-5">
                 <Link
                   className="text-violet-50 transition ease-in-out delay-0 hover:text-violet-600 duration-700"
-                  to="/"
+                  to="/pages/ShoesList"
                 >
                   Shoes
                 </Link>

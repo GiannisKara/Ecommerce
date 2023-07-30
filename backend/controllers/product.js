@@ -50,3 +50,11 @@ exports.getAllProducts = (req, res) => {
     .then((foundProducts) => res.json(foundProducts))
     .catch((err) => res.json(err));
 };
+
+//Controller for deleting a product
+
+exports.deleteProduct = (req,res) => {
+  Product.findByIdAndDelete({_id:req.params.id})
+  .then(doc => console.log(doc))
+  .catch((err) => console.log(err))
+}

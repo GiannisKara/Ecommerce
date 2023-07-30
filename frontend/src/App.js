@@ -10,6 +10,8 @@ import CartProvider from "./CartConstext";
 import Create from "./pages/Create";
 import Dashboard from "./pages/Dashboard";
 import TshirtList from "./pages/TshirtList";
+import ShoesList from "./pages/ShoesList";
+import JeansList from "./pages/JeansList";
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
             <Route path="/pages/Signup" element={<Signup />} />
             <Route path="/components/Carousel" element={<Carousel />} />
             <Route path="/pages/TshirtList" element={<TshirtList />} />
+            <Route path="/pages/ShoesList" element={<ShoesList />} />
+            <Route path="/pages/JeansList" element={<JeansList />} />
           </Routes>
         </Router>
       </CartProvider>
