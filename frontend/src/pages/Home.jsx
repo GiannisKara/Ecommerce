@@ -1,63 +1,36 @@
 import { Link } from "react-router-dom";
-
-import { ProductArray } from "../ProductStore";
 import ProductCard from "../components/ProductCard";
+import { ProductArray } from "../ProductStore";
+import lotus from "../images/lotus.png";
+ 
 
 const Home = () => {
   return (
     <div className="min-h-screen min-w-screen bg-gradient-to-r from-violet-200 to-violet-400  lg:p-20">
-      <div className="flex flex-row w-screen lg:w-[65%] left-0  mx-auto p-3 mt-3">
-        <div className="flex flex-col left-0 min-w-[fit-content] ">
-          <div className="bg-violet-500 bg-opacity-25 rounded p-10 lg:text-[20px] sm:w-[fit-content] text-[13px]">
-            <h2 className="pb-6 text-violet-50">Categories</h2>
-            <ul className="list-none ">
-              <li className="pb-5">
-                <Link
-                  className="text-violet-50 transition ease-in-out delay-0 hover:text-violet-600 duration-700"
-                  to="/pages/TshirtList"
-                >
-                  T-shirts
-                </Link>
-              </li>
-              <li className="pb-5">
-                <Link
-                  className="text-violet-50 transition ease-in-out delay-0 hover:text-violet-600 duration-700"
-                  to="/pages/JeansList"
-                >
-                  Jeans
-                </Link>
-              </li>
-              <li className="pb-5">
-                <Link
-                  className="text-violet-50 transition ease-in-out delay-0 hover:text-violet-600 duration-700"
-                  to="/pages/ShoesList"
-                >
-                  Shoes
-                </Link>
-              </li>
-            </ul>
+         <div className="lg:mt-[-30px] text-center ">  
+          <h1 className="text-[50px] mx-auto text-violet-50 lg:text-[70px]">~ Welcome to Lotus ~</h1>
+          <img className="w-[75%] h-auto mx-auto m-5 lg:w-[38%]" src={lotus} />
+          <p className="text-violet-50 mt-10 lg:text-[35px]">The superior E-commerce experience</p>
           </div>
-          <div className="bg-violet-500 bg-opacity-25 rounded p-10 text-[13px] lg:text-[20px] mt-5 ">
-            <h2 className="pb-6 text-violet-50">Filters</h2>
-            <ul className="list-none">
-              <li className="pb-5 text-violet-50">Price</li>
-              <li className="pb-5 text-violet-50">Size</li>
-              <li className="pb-5 text-violet-50">Color</li>
-            </ul>
+          <h2 className="text-center text-violet-50 text-[30px] mt-12 mb-[-25px] lg:text-[55px] lg:mt-[150px]">What are you looking for?</h2>
+          <div className="flex flex-col justify-evenly m-10 h-[85rem] text-violet-50 lg:flex-row lg:mt-12">
+           <Link  to="./pages/TshirtList" className="flex flex-col items-center justify-center border-2 border-violet-50 m-5 h-[40%] text-[25px] rounded-xl lg:w-[18%] transition-ease-in-out delay-0 hover:transform hover:translate-x-4 hover:translate-y-4 duration-500">
+            <div>
+              <h2 className="">T-Shirts</h2>
+            </div>
+            </Link>
+            <Link to="./pages/JeansList" className="flex flex-col items-center justify-center border-2 border-violet-50 m-5 h-[40%] text-[25px] rounded-xl lg:w-[18%] transition-ease-in-out delay-0 hover:transform hover:translate-x-4 hover:translate-y-4 duration-500">
+            <div>
+              <h2>Jeans</h2>
+            </div>
+            </Link>
+            <Link to="./pages/ShoesList" className="flex flex-col items-center justify-center border-2 border-violet-50 m-5 h-[40%] text-[25px] rounded-xl  lg:w-[18%] transition-ease-in-out delay-0 hover:transform hover:translate-x-4 hover:translate-y-4 duration-500">
+            <div>
+              <h2>Shoes</h2>
+            </div>
+            </Link>
           </div>
-        </div>
-
-        <div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 overflow-y-hidden">
-            {ProductArray.map((product, idx) => (
-              <div className="flex justify-center" key={idx}>
-                <ProductCard product={product} />
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
+    </div>   
   );
 };
 

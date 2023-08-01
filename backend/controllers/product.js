@@ -58,3 +58,9 @@ exports.deleteProduct = (req,res) => {
   .then(doc => console.log(doc))
   .catch((err) => console.log(err))
 }
+
+exports.getSingleProduct = (req, res) => {
+  Product.find({_id:req.params._id})
+    .then((foundProducts) => res.json(foundProducts))
+    .catch((err) => res.json(err));
+};

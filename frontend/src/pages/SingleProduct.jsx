@@ -1,16 +1,29 @@
-import Carousel from "../components/Carousel";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 
 const Singleproduct = () => {
-    return ( 
+  const { _id } = useParams(); 
+  const [product, setProduct] = useState(); 
+
+    useEffect(() => {
+      axios
+        .get(`http://localhost:5050/products/` + _id )
+        .then((res) => setProduct(res.data))
+        .catch((err) => console.log(err));
+  }, );
+
+  
+     return ( 
         <div className="min-h-screen min-w-screen bg-gradient-to-r from-violet-200 to-violet-400  lg:p-20">
           <div className='grid lg:grid-cols-2 grid-cols-1 lg:m-[100px] m-3 text-violet-50'>
            <div  > 
-            <Carousel /> 
+            {product.image}
            </div>
           <div className='flex flex-col lg:w-[80%] w-[fit-content] text-center '>
-          <h1 className='text-[30px] mb-5'>Product1</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et mi at leo semper vulputate ac ac urna. </p>
+          <h1 className='text-[30px] mb-5'>{product.Title}</h1>
+          <p>{ product.Description } </p>
           <h3 className='mt-10'>Select Size:</h3>
            <div className='flex flex-row items-center justify-center p-3'>  
              <div className='p-3 overflow-hidden'>

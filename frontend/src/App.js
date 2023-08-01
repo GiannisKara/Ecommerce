@@ -22,10 +22,7 @@ function App() {
           <Routes>
             <Route exact path="/" />
             <Route index element={<Home />} />
-            <Route
-              path="/pages/SingleProduct"
-              element={<Singleproduct />}
-            ></Route>
+            <Route path="/products/:_id" element={<Singleproduct />} />
             <Route path="/pages/Create" element={<Create />}></Route>
             <Route path="/pages/Dashboard" element={<Dashboard />} />
             <Route path="/pages/Login" element={<Login />} />

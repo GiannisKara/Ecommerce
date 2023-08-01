@@ -13,7 +13,9 @@ router.post(
 // Route for getting all products
 router.get("/allproducts", productController.getAllProducts);
 
-router.route("/allproducts/:id", productController.deleteProduct);
+router.get("/products/:_id  ", productController.getSingleProduct);
+
+router.delete("/allproducts/:_id", productController.deleteProduct);
 
 
 module.exports = router;
