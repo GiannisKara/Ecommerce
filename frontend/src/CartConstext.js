@@ -1,86 +1,107 @@
-import { createContext, useState } from "react";
-import { getProdactData } from "./ProductStore";
+import { createContext, useState, useEffect } from "react";
+import axios from "axios";
 
 export const CartContext = createContext({
   items: [],
   getProductsQuantity: () => {},
   addOneToCart: () => {},
-  RemoveOneFromCart: () => {},
+  removeOneFromCart: () => {},
   deleteFromCart: () => {},
   getTotalCost: () => {},
+  productData: {},
 });
 
 export function CartProvider({ children }) {
-  const [cartProducts, setcardProducts] = useState([]);
+  const [cartProducts, setCartProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  //Quantity Function
+  useEffect(() => {
+    axios
+      .get("http://localhost:5050/allproducts")
+      .then((res) => {
+        setCartProducts([]);
+        setLoading(false);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   function getProductsQuantity(id) {
     const quantity = cartProducts.find(
       (product) => product.id === id
     )?.quantity;
-
     if (quantity === undefined) {
       return 0;
     }
     return quantity;
   }
-  //add product to cart funcrion
-  function addOneToCart(id) {
-    const quantity = getProductsQuantity(id);
-    if (quantity === 0) {
-      //if product is not in the cart
-      setcardProducts([...cartProducts, { id: id, quantity: 1 }]);
+
+  function addOneToCart(_id) {
+    const existingItemIndex = cartProducts.findIndex(
+      (product) => product.id === _id
+    );
+    if (existingItemIndex !== -1) {
+      setCartProducts((prevCartProducts) =>
+        prevCartProducts.map((product, index) =>
+          index === existingItemIndex
+            ? { ...product, quantity: product.quantity + 1 }
+            : product
+        )
+      );
     } else {
-      //product is in the cart
-      setcardProducts(
-        cartProducts.map((product) =>
-          product.id === id ? { ...product, quantity: quantity + 1 } : product
+      axios
+        .get(`http://localhost:5050/products/${_id}`)
+        .then((res) => {
+          const productData = res.data;
+          setCartProducts((prevCartProducts) => [
+            ...prevCartProducts,
+            { id: _id, quantity: 1, productData },
+          ]);
+        })
+        .catch((err) => console.log(err));
+    }
+  }
+
+  function removeOneFromCart(id) {
+    const existingItemIndex = cartProducts.findIndex(
+      (product) => product.id === id
+    );
+    if (existingItemIndex !== -1) {
+      setCartProducts((prevCartProducts) =>
+        prevCartProducts.map((product, index) =>
+          index === existingItemIndex
+            ? { ...product, quantity: product.quantity - 1 }
+            : product
         )
       );
     }
   }
-  // remove one item from cart function
-  function RemoveOneFromCart(id) {
-    const quantity = getProductsQuantity(id);
-    if (quantity === 1) {
-      deleteFromCart(id);
-    } else {
-      setcardProducts(
-        cartProducts.map((product) =>
-          product.id === id ? { ...product, quantity: quantity - 1 } : product
-        )
-      );
-    }
-  }
-  // delete product from cart function
+
   function deleteFromCart(id) {
-    //<logic>
-    //[array] if an boject meets a condition , add the object to the array
-    //[product id:1] [product id:2] [product id:3]
-    //[product id:1] [product id:3]
-    //</logic>
-    setcardProducts((cartProducts) =>
-      cartProducts.filter((currentProduct) => {
-        return currentProduct.id !== id;
-      })
+    setCartProducts((prevCartProducts) =>
+      prevCartProducts.filter((currentProduct) => currentProduct.id !== id)
     );
   }
 
-  //SUM the total of cart funcrion
   function getTotalCost() {
-    let totalcost = 0;
-    cartProducts.map((cartItem) => {
-      const productData = getProdactData(cartItem.id);
-      totalcost += productData.price * cartItem.quantity;
-    });
-    return totalcost;
+    let totalCost = 0;
+
+    if (!loading) {
+      cartProducts.forEach((cartItem) => {
+        const product = cartItem.productData;
+        if (product) {
+          totalCost += product.price * cartItem.quantity;
+        }
+      });
+    }
+
+    return totalCost;
   }
 
   const contextValue = {
     items: cartProducts,
     getProductsQuantity,
     addOneToCart,
-    RemoveOneFromCart,
+    removeOneFromCart,
     deleteFromCart,
     getTotalCost,
   };
@@ -89,5 +110,3 @@ export function CartProvider({ children }) {
     <CartContext.Provider value={contextValue}>{children}</CartContext.Provider>
   );
 }
-
-export default CartProvider;

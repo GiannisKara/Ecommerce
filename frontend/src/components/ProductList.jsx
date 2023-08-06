@@ -2,18 +2,14 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import ProductCard from "./ProductCard";
 
-
-
 const ProductList = ({ products }) => {
-  
   const handleDelete = (id) => {
     axios
-    .delete(`http://localhost:5050/allproducts/${id}`)
-    .catch((err) => console.log(err));
-     window.location.reload();
-  }
+      .delete(`http://localhost:5050/allproducts/${id}`)
+      .catch((err) => console.log(err));
+    window.location.reload();
+  };
 
-  
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 m-5 text-center">
       {products.map((product) => (
@@ -28,12 +24,11 @@ const ProductList = ({ products }) => {
               alt={product.Name}
             />
             <h2 className="text-[30px] mt-5">{product.Name}</h2>
-            <h3> ${product.Price} </h3>          
+            <h3> ${product.Price} </h3>
           </Link>
           {/*<button className="border border-red-700" onClick={() => handleDelete(product._id)}>Delete</button>*/}
-          
-                <ProductCard product={product} />
-              
+
+          <ProductCard product={product} />
         </div>
       ))}
     </div>

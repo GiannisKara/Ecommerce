@@ -3,37 +3,41 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
 // User Login
-const login = (req, res) => {
+const login = async (req, res) => {
   const { email, password } = req.body;
 
-  User.findOne({ email: email }).then((user) => {
-    if (user) {
-      bcrypt.compare(password, user.password, (err, response) => {
-        if (response) {
-          const token = jwt.sign(
-            { email: user.email, role: user.role },
-            "secret-key",
-            { expiresIn: "2d" }
-          );
-          res.cookie("token", token);
+  try {
+    const user = await User.findOne({ email: email });
 
-          return res.json({ status: "OK", role: user.role });
-        } else {
-          return res.json("Incorrect password");
-        }
-      });
+    if (user) {
+      const passwordMatch = await bcrypt.compare(password, user.password);
+
+      if (passwordMatch) {
+        const token = jwt.sign(
+          { email: user.email, role: user.role },
+          "secret-key",
+          { expiresIn: "2d" }
+        );
+        res.cookie("token", token);
+
+        return res.json({ status: "OK", role: user.role, name: user.name });
+      } else {
+        return res.status(401).json({ error: "Incorrect password" });
+      }
     } else {
-      return res.json("User not exists");
+      return res.status(404).json({ error: "User not found" });
     }
-  });
+  } catch (error) {
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
 };
 
 // User Signup
 const signup = (req, res) => {
   const { name, email, password } = req.body;
   User.findOne({ email: email }).then((user) => {
-    if (email) {
-      return res.json({ status: "USER ALREADY EXIST" });
+    if (user) {
+      return res.json({ status: "USER ALREADY EXISTS" });
     } else {
       bcrypt
         .hash(password, 10)

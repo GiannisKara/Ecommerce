@@ -6,13 +6,13 @@ import Topnav from "./layout/Topnav";
 import Footer from "./layout/Footer";
 import Singleproduct from "./pages/SingleProduct";
 import Carousel from "./components/Carousel";
-import CartProvider from "./CartConstext";
+import { CartProvider } from "./CartConstext";
 import Create from "./pages/Create";
 import Dashboard from "./pages/Dashboard";
 import TshirtList from "./pages/TshirtList";
 import ShoesList from "./pages/ShoesList";
 import JeansList from "./pages/JeansList";
-
+import ProductDetail from "./ProductStore";
 function App() {
   return (
     <div className="App">
@@ -22,6 +22,8 @@ function App() {
           <Routes>
             <Route exact path="/" />
             <Route index element={<Home />} />
+            <Route path="/products/:_id" component={ProductDetail} />
+
             <Route path="/products/:_id" element={<Singleproduct />} />
             <Route path="/pages/Create" element={<Create />}></Route>
             <Route path="/pages/Dashboard" element={<Dashboard />} />

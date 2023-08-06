@@ -1,14 +1,13 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { CartContext } from "../CartConstext";
 
 function ProductCard(props) {
   const product = props.product;
   const cart = useContext(CartContext);
   const productQuantity = cart.getProductsQuantity(product._id);
-  console.log(cart.items);
+
   return (
     <div className="border border-gray-300 rounded p-4">
-      
       {productQuantity > 0 ? (
         <>
           <div className="flex items-center mt-4">
@@ -22,7 +21,7 @@ function ProductCard(props) {
               </button>
               <button
                 className="px-2 py-1 mx-2 bg-blue-500 text-white rounded"
-                onClick={() => cart.RemoveOneFromCart(product._id)}
+                onClick={() => cart.removeOneFromCart(product._id)}
               >
                 -
               </button>

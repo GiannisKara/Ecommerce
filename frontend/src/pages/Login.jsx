@@ -16,15 +16,20 @@ const Login = () => {
         if (res.data.status === "OK") {
           if (res.data.role === "admin") {
             navigate("/Dashboard");
-          } else if (res.data.status === "OK") {
-            navigate("/", { state: { id: res.data.name } });
+          } else {
+            localStorage.setItem("NAME", res.data.name);
+            navigate("/");
           }
+          return; // Add a return statement to stop further execution
         }
+        // Handle other response statuses here if needed
+        console.log("Invalid email or password"); // Generic error message for security
       })
       .catch((err) => {
-        console.log(err);
+        console.log("An error occurred:", err); // Log the error for debugging
       });
   };
+
   return (
     <div className="min-h-screen min-w-screen bg-gradient-to-r from-violet-200 to-violet-400 p-20">
       <div className="min-w-[fit-content] w-[50%] h-[35rem] md:w-[60%] lg:w-[20%] bg-gradient-to-r from-violet-400 to-violet-600 mx-auto border-4 border-violet-50 rounded-lg p-3 lg:p-5">
@@ -32,7 +37,7 @@ const Login = () => {
           Log-In
         </h1>
 
-        <form  className="flex flex-col content-center ">
+        <form onSubmit={submit} className="flex flex-col content-center ">
           <input
             className="w-[100%] mx-auto m-5 p-1 border-2 border-violet-800 rounded bg-violet-300 text-violet-50 placeholder-violet-50 text-[17px]"
             type="email"
@@ -53,10 +58,9 @@ const Login = () => {
             name="password"
             id="password"
           />
-          <button 
+          <button
             className="w-[55%] mx-auto m-10 p-1 border-2 border-violet-800  bg-violet-500 rounded text-violet-50 text-[20px] transition ease-in-out delay-0 hover:bg-violet-950 hover:border-violet-50 duration-700  "
             type="submit"
-            onSubmit={submit}
           >
             Log-In
           </button>
@@ -66,7 +70,7 @@ const Login = () => {
           >
             Don't have an account?
           </Link>
-        </form >
+        </form>
       </div>
     </div>
   );
