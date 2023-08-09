@@ -8,6 +8,7 @@ require("dotenv").config();
 const users = require("./routes/user");
 const auth = require("./routes/auth");
 const product = require("./routes/product");
+const ordersRoute = require("./routes/order");
 //APP DEPENTENCES
 app.use(
   cors({
@@ -24,6 +25,7 @@ app.use(users);
 app.use(auth);
 app.use(product);
 
+app.use(ordersRoute);
 // Stripe Connect
 const stripe = require("stripe")(process.env.STRIPE_URI);
 
@@ -33,7 +35,7 @@ app.post("/checkout", async (req, res) => {
   let lineItems = [];
   items.forEach((item) => {
     lineItems.push({
-      price: item.id,
+      price: item.stripe,
       quantity: item.quantity,
     });
   });

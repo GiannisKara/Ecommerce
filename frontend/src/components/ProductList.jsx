@@ -27,7 +27,6 @@ const ProductList = ({ products }) => {
             <h3> ${product.Price} </h3>
           </Link>
           {/*<button className="border border-red-700" onClick={() => handleDelete(product._id)}>Delete</button>*/}
-
           <ProductCard product={product} />
         </div>
       ))}

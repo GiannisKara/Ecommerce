@@ -18,15 +18,16 @@ const Login = () => {
             navigate("/Dashboard");
           } else {
             localStorage.setItem("NAME", res.data.name);
+            localStorage.setItem("EMAIL", res.data.email);
             navigate("/");
           }
-          return; // Add a return statement to stop further execution
+          return;
         }
-        // Handle other response statuses here if needed
-        console.log("Invalid email or password"); // Generic error message for security
+
+        console.log("Invalid email or password");
       })
       .catch((err) => {
-        console.log("An error occurred:", err); // Log the error for debugging
+        console.log("An error occurred:", err);
       });
   };
 

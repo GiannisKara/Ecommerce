@@ -13,6 +13,8 @@ import TshirtList from "./pages/TshirtList";
 import ShoesList from "./pages/ShoesList";
 import JeansList from "./pages/JeansList";
 import ProductDetail from "./ProductStore";
+import ShippingInfo from "./pages/shipping";
+import Success from "./pages/Success";
 function App() {
   return (
     <div className="App">
@@ -23,7 +25,10 @@ function App() {
             <Route exact path="/" />
             <Route index element={<Home />} />
             <Route path="/products/:_id" component={ProductDetail} />
-
+            <Route
+              path="/pages/shippinginfo"
+              element={<ShippingInfo />}
+            ></Route>
             <Route path="/products/:_id" element={<Singleproduct />} />
             <Route path="/pages/Create" element={<Create />}></Route>
             <Route path="/pages/Dashboard" element={<Dashboard />} />
@@ -33,6 +38,7 @@ function App() {
             <Route path="/pages/TshirtList" element={<TshirtList />} />
             <Route path="/pages/ShoesList" element={<ShoesList />} />
             <Route path="/pages/JeansList" element={<JeansList />} />
+            <Route path="/pages/Success" element={<Success />} />
           </Routes>
         </Router>
       </CartProvider>

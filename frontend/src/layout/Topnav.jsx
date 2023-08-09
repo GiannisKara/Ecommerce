@@ -1,5 +1,5 @@
 import lotus from "../images/lotus.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useContext } from "react";
 import { CartContext } from "../CartConstext";
@@ -7,7 +7,7 @@ import CartProduct from "../components/CartProduct";
 
 const Topnav = () => {
   const [logggedIn, setLoggedIn] = useState(false);
-
+  const navigate = useNavigate();
   const name = localStorage.getItem("NAME");
   useEffect(() => {
     if (name) {
@@ -28,21 +28,14 @@ const Topnav = () => {
     0
   );
   const checkout = async () => {
-    await fetch("http://localhost:5050/checkout", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ items: cart.items }),
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((response) => {
-        if (response.url) {
-          window.location.assign(response.url); // Forwarding user to Stripe
-        }
-      });
+    if (name) {
+      navigate("pages/shippinginfo");
+      setShow(false);
+    } else {
+      alert("You need to login to procced your checkout");
+      navigate("pages/login");
+      setShow(false);
+    }
   };
 
   return (

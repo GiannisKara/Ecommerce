@@ -20,7 +20,12 @@ const login = async (req, res) => {
         );
         res.cookie("token", token);
 
-        return res.json({ status: "OK", role: user.role, name: user.name });
+        return res.json({
+          status: "OK",
+          role: user.role,
+          name: user.name,
+          email: user.email,
+        });
       } else {
         return res.status(401).json({ error: "Incorrect password" });
       }

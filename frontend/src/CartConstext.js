@@ -51,10 +51,11 @@ export function CartProvider({ children }) {
       axios
         .get(`http://localhost:5050/products/${_id}`)
         .then((res) => {
+          const stripe = res.data.stripe;
           const productData = res.data;
           setCartProducts((prevCartProducts) => [
             ...prevCartProducts,
-            { id: _id, quantity: 1, productData },
+            { stripe: stripe, id: _id, quantity: 1, productData },
           ]);
         })
         .catch((err) => console.log(err));
