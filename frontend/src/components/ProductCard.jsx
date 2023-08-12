@@ -4,24 +4,25 @@ import { CartContext } from "../CartConstext";
 function ProductCard(props) {
   const product = props.product;
   const cart = useContext(CartContext);
-  const productQuantity = cart.getProductsQuantity(product._id);
 
+  const productQuantity = cart.getProductsQuantity(product.id);
+  // const size = localStorage.getItem("SIZE");
   return (
-    <div className="border border-gray-300 rounded p-4">
+    <div className="mt-10 mb-10 bg-violet-600 border-2 border-violet-800 text-violet-50 p-2 w-[50%] mx-auto rounded transition ease-in-out delay-0 hover:bg-violet-950 hover:border-violet-50 duration-700 ">
       {productQuantity > 0 ? (
         <>
           <div className="flex items-center mt-4">
             <label className="w-1/2">In Cart: {productQuantity}</label>
             <div className="w-1/2 flex">
               <button
-                className="px-2 py-1 mx-2 bg-blue-500 text-white rounded"
-                onClick={() => cart.addOneToCart(product._id)}
+                className="mt-10 mb-10 bg-violet-600 border-2 border-violet-800 text-violet-50 p-2 w-[50%] mx-auto rounded transition ease-in-out delay-0 hover:bg-violet-950 hover:border-violet-50 duration-700 "
+                onClick={() => cart.addOneToCart(product.id)}
               >
                 +
               </button>
               <button
-                className="px-2 py-1 mx-2 bg-blue-500 text-white rounded"
-                onClick={() => cart.removeOneFromCart(product._id)}
+                className="mt-10 mb-10 bg-violet-600 border-2 border-violet-800 text-violet-50 p-2 w-[50%] mx-auto rounded transition ease-in-out delay-0 hover:bg-violet-950 hover:border-violet-50 duration-700"
+                onClick={() => cart.removeOneFromCart(product.id)}
               >
                 -
               </button>
@@ -29,15 +30,15 @@ function ProductCard(props) {
           </div>
           <button
             className="mt-4 px-4 py-2 bg-red-500 text-white rounded"
-            onClick={() => cart.deleteFromCart(product._id)}
+            onClick={() => cart.deleteFromCart(product.id)}
           >
             Remove from Cart
           </button>
         </>
       ) : (
         <button
-          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
-          onClick={() => cart.addOneToCart(product._id)}
+          className="mt-10 mb-10 bg-violet-600 border-2 border-violet-800 text-violet-50 p-2 w-[50%] mx-auto rounded transition ease-in-out delay-0 hover:bg-violet-950 hover:border-violet-50 duration-700 "
+          onClick={() => cart.addOneToCart(product.id)}
         >
           Add to Cart
         </button>

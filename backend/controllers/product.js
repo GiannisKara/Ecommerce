@@ -76,7 +76,8 @@ exports.getSingleProduct = (req, res) => {
       }
       res.json({
         status: "OK",
-
+        id: foundProduct._id,
+        description: foundProduct.Description,
         image: foundProduct.image,
         stripe: foundProduct.StripeKey,
         name: foundProduct.Name,

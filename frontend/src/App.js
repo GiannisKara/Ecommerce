@@ -24,11 +24,12 @@ function App() {
           <Routes>
             <Route exact path="/" />
             <Route index element={<Home />} />
-            <Route path="/products/:_id" component={ProductDetail} />
+            <Route path="/products/productId" component={ProductDetail} />
             <Route
               path="/pages/shippinginfo"
               element={<ShippingInfo />}
             ></Route>
+
             <Route path="/products/:_id" element={<Singleproduct />} />
             <Route path="/pages/Create" element={<Create />}></Route>
             <Route path="/pages/Dashboard" element={<Dashboard />} />

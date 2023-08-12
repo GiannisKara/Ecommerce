@@ -9,7 +9,7 @@ const ShippingInfo = () => {
   if (!name) {
     navigate("/pages/login");
   }
-  const cart = useContext(CartContext); // Assuming you're using CartContext
+  const cart = useContext(CartContext);
 
   const [Category, setCategory] = useState("Credit Card-Stripe");
   const [input, setInput] = useState({
@@ -39,6 +39,7 @@ const ShippingInfo = () => {
       !input.Area ||
       !input.ZIPcode
     ) {
+      alert("All required fields must be filled");
       console.log("All required fields must be filled");
       return;
     }
@@ -56,6 +57,7 @@ const ShippingInfo = () => {
       items: cart.items.map((item) => ({
         productId: item.productData._id,
         productName: item.productData.name,
+        size: item.size,
         quantity: item.quantity,
       })),
     };
@@ -189,9 +191,11 @@ const ShippingInfo = () => {
                 className="w-16 h-16 object-cover"
               />
             </div>
+
             <div>
               <p className="font-medium">{item.productData.name}</p>
               <p>Quantity: {item.quantity}</p>
+              <p>Size : {item.size}</p>
               <p>
                 Price: ${(item.quantity * item.productData.price).toFixed(2)}
               </p>

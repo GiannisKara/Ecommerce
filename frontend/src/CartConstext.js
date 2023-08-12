@@ -36,6 +36,10 @@ export function CartProvider({ children }) {
   }
 
   function addOneToCart(_id) {
+    if (!_id) {
+      console.log("Invalid product ID");
+      return;
+    }
     const existingItemIndex = cartProducts.findIndex(
       (product) => product.id === _id
     );
@@ -51,11 +55,13 @@ export function CartProvider({ children }) {
       axios
         .get(`http://localhost:5050/products/${_id}`)
         .then((res) => {
+          const size = localStorage.getItem(`SIZE_${_id}`);
           const stripe = res.data.stripe;
           const productData = res.data;
+          const id = res.data.id;
           setCartProducts((prevCartProducts) => [
             ...prevCartProducts,
-            { stripe: stripe, id: _id, quantity: 1, productData },
+            { stripe: stripe, id: id, quantity: 1, productData, size: size },
           ]);
         })
         .catch((err) => console.log(err));

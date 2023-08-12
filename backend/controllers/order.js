@@ -34,6 +34,7 @@ exports.createOrder = async (req, res) => {
       items: items.map((item) => ({
         productId: item.productId,
         productName: item.productName,
+        size: item.size,
         quantity: item.quantity,
       })),
     });

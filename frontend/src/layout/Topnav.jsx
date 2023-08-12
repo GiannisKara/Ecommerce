@@ -127,16 +127,20 @@ const Topnav = () => {
                   <p className="mb-2">Items in your cart:</p>
                   {cart.items.map((currentProduct) => {
                     const product = currentProduct.productData;
+                    const _id = currentProduct.productId;
+                    const size = localStorage.getItem(`SIZE_${_id}`);
 
-                    if (!product) return null;
-
+                    if (!product) {
+                      return null;
+                    }
                     return (
                       <CartProduct
                         key={currentProduct.id}
                         id={currentProduct.id}
+                        size={size}
                         productData={product}
                         quantity={currentProduct.quantity}
-                        onRemove={cart.removeOneFromCart}
+                        onRemove={cart.deleteFromCart}
                         className="border border-violet-500"
                       />
                     );
