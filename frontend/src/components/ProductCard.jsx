@@ -11,11 +11,13 @@ function ProductCard(props) {
     <div className="mt-10 mb-10 bg-violet-600 border-2 border-violet-800 text-violet-50 p-2 w-[50%] mx-auto rounded transition ease-in-out delay-0 hover:bg-violet-950 hover:border-violet-50 duration-700 ">
       {productQuantity > 0 ? (
         <>
-          <div className="flex items-center mt-4">
+          <div className="flex flex-col items-center mt-4">
             <label className="w-1/2">In Cart: {productQuantity}</label>
-            <div className="w-1/2 flex">
+            <label className="mt-10 mx-auto ">Quantity:</label>
+            <div className="w-1/2 flex mt-[-25px]">
+              
               <button
-                className="mt-10 mb-10 bg-violet-600 border-2 border-violet-800 text-violet-50 p-2 w-[50%] mx-auto rounded transition ease-in-out delay-0 hover:bg-violet-950 hover:border-violet-50 duration-700 "
+                className="mt-10 mr-1 mb-10 bg-violet-600 border-2 border-violet-800 text-violet-50 p-2 w-[50%] mx-auto rounded transition ease-in-out delay-0 hover:bg-violet-950 hover:border-violet-50 duration-700 "
                 onClick={() => cart.addOneToCart(product.id)}
               >
                 +
@@ -29,7 +31,7 @@ function ProductCard(props) {
             </div>
           </div>
           <button
-            className="mt-4 px-4 py-2 bg-red-500 text-white rounded"
+            className="mt-4 px-4 lg:py-2 bg-red-500 text-white rounded"
             onClick={() => cart.deleteFromCart(product.id)}
           >
             Remove from Cart
@@ -37,7 +39,7 @@ function ProductCard(props) {
         </>
       ) : (
         <button
-          className="mt-10 mb-10 bg-violet-600 border-2 border-violet-800 text-violet-50 p-2 w-[50%] mx-auto rounded transition ease-in-out delay-0 hover:bg-violet-950 hover:border-violet-50 duration-700 "
+          className=""
           onClick={() => cart.addOneToCart(product.id)}
         >
           Add to Cart

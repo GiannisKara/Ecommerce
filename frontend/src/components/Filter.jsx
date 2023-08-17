@@ -18,7 +18,7 @@ const Filters = () => {
    }
 
     return ( 
-        <div className=" mt-10 h-[5rem] lg:w-[60%] mx-auto overflow-hidden">
+        <div className="ml-10 lg:ml-auto mt-10 h-[5rem] lg:w-[60%] mx-auto overflow-hidden">
           
           <div className="text-violet-600  w-[fit-content] ">
           <button onClick={handleCategoryMenu}  className="-z-1 flex items-center border-2 border-violet-600 rounded-lg bg-violet-100 p-2 lg:text-[18px] text-[14px] focus:outline-none justify-center lg:w-[13rem]">Categories<svg className="ml-5" xmlns="http://www.w3.org/2000/svg" height="1.4em" viewBox="0 0 448 512"><path fill="purple" d={arrow}/></svg></button>
