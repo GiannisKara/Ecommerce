@@ -40,7 +40,7 @@ exports.createOrder = async (req, res) => {
     });
 
     const savedOrder = await newOrder.save();
-    res.json({ status: "OK ", savedOrder });
+    res.json({ status: "OK", savedOrder });
   } catch (error) {
     res.status(500).json({ error: "An error occurred while saving the order" });
   }

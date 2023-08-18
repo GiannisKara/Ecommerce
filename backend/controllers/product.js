@@ -44,10 +44,31 @@ exports.createProduct = (req, res) => {
 };
 
 // Controller for getting all products
-exports.getAllProducts = (req, res) => {
-  Product.find()
-    .then((foundProducts) => res.json(foundProducts))
-    .catch((err) => res.json(err));
+exports.getAllProducts = async (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1; // Parse page as integer
+    const itemsPerPage = 1; // Define items per page
+
+    const query = {}; // You can add filters here if needed
+
+    const count = await Product.estimatedDocumentCount(query);
+    const items = await Product.find(query)
+      .skip((page - 1) * itemsPerPage)
+      .limit(itemsPerPage);
+
+    const pageCount = Math.ceil(count / itemsPerPage);
+
+    res.json({
+      pagination: {
+        count,
+        pageCount,
+      },
+      items,
+    });
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    res.status(500).json({ error: "Server error" });
+  }
 };
 
 //Controller for deleting a product

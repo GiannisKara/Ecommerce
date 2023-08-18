@@ -17,7 +17,6 @@ const Topnav = () => {
   const logout = () => {
     localStorage.clear();
     setLoggedIn(false);
-    window.location.reload();
   };
   const cart = useContext(CartContext);
 
@@ -72,31 +71,23 @@ const Topnav = () => {
               </Link>
             )}
             {logggedIn && (
-             
-             <h1 className=" text-violet-50 flex flex-row ">
-                <div className="flex ">
-                 <div className="flex">
-                 Logged-In
-                  <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      height="0.7em"
-                      viewBox="0 0 384 512"
-                    >
-                      <path
-                        fill="lime"
-                        d="M384 192c0 87.4-117 243-168.3 307.2c-12.3 15.3-35.1 15.3-47.4 0C117 435 0 279.4 0 192C0 86 86 0 192 0S384 86 384 192z"
-                      />
-                    </svg>
-                    </div>
-                    /
+              <h1 className=" text-violet-50 flex flex-row ">
+                Welcome {name}
                 <span>
                   {" "}
-                  <button className=" w-[100%] transition ease-in-out delay-0 hover:text-violet-700  duration-500" onClick={logout}>Logout</button>
-                {" "}
+                  <button onClick={logout}>Logout</button>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="0.7em"
+                    viewBox="0 0 384 512"
+                  >
+                    <path
+                      fill="lime"
+                      d="M384 192c0 87.4-117 243-168.3 307.2c-12.3 15.3-35.1 15.3-47.4 0C117 435 0 279.4 0 192C0 86 86 0 192 0S384 86 384 192z"
+                    />
+                  </svg>{" "}
                 </span>
-                </div>
               </h1>
-             
             )}
           </div>
           <button

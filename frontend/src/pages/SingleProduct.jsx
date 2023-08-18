@@ -1,15 +1,12 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import ProductCard from "../components/ProductCard";
-import { Navigate } from "react-router-dom";
 
 const Singleproduct = () => {
   const { _id } = useParams();
   const [product, setProduct] = useState(null);
   const [size, setSize] = useState("");
-  const navigate = useNavigate() ;
-  
   useEffect(() => {
     //localStorage.removeItem(`SIZE_${_id}`);
     axios
@@ -24,7 +21,6 @@ const Singleproduct = () => {
       })
       .catch((err) => console.log(err));
   }, [_id]);
-
   const handleSizeChange = (newSize) => {
     setSize(newSize);
     localStorage.setItem(`SIZE_${_id}`, newSize);
@@ -32,29 +28,21 @@ const Singleproduct = () => {
   if (!product) {
     return <div>Loading...</div>;
   }
-  
-   const handleNavigation = () =>{
-         navigate(-1);
-   }
-
-    return (
+  return (
     <>
-      
       <div className="min-h-screen min-w-screen bg-gradient-to-r from-violet-200 to-violet-400  lg:p-20">
-      <button className="ml-3 text-violet-50 flex justify-center items-center hover:underline lg:text-[30px]" onClick={handleNavigation}><svg className="mr-1" xmlns="http://www.w3.org/2000/svg" height="0.8em" viewBox="0 0 448 512"><path fill="white" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>Back</button>
         <div className="grid lg:grid-cols-2 grid-cols-1 lg:m-[100px] m-3 text-violet-50">
           <div>
             <img
               src={`http://localhost:5050/images/${product.image}`}
               alt={product.name}
-              className=" w-30 lg:h-[45rem] h-30 object-cover m-2"
+              className=" w-30 h-30 object-cover"
             />
           </div>
-          <div className="flex flex-col lg:w-[80%] w-[fit-content] text-center m-2 ">
+          <div className="flex flex-col lg:w-[80%] w-[fit-content] text-center ">
             <h1 className="text-[30px] mb-5">{product.name}</h1>
             <p>{product.description} </p>
-            <h3 className="mt-8">Price:</h3>
-            <p>${product.price}</p>
+            <p>{product.price}</p>
             <h3 className="mt-10">Select Size:</h3>
             <div className="flex flex-row items-center justify-center p-3">
               <div
@@ -66,7 +54,7 @@ const Singleproduct = () => {
               >
                 <input
                   onClick={() => handleSizeChange("XS")}
-                  className={`p-3 overflow-hidden w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 ${
+                  className={`p-3 overflow-hidden ${
                     size ? "disabled-size" : ""
                   }`}
                   type="radio"
@@ -81,7 +69,7 @@ const Singleproduct = () => {
               <div className=" overflow-hidden p-3">
                 <input
                   onClick={() => handleSizeChange("S")}
-                  className={`p-3 overflow-hidden w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600${
+                  className={`p-3 overflow-hidden ${
                     size ? "disabled-size" : ""
                   }`}
                   type="radio"
@@ -97,7 +85,7 @@ const Singleproduct = () => {
               <div className="p-3 overflow-hidden">
                 <input
                   onClick={() => handleSizeChange("M")}
-                  className={`p-3 overflow-hidden w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 ${
+                  className={`p-3 overflow-hidden ${
                     size ? "disabled-size" : ""
                   }`}
                   type="radio"
@@ -112,7 +100,7 @@ const Singleproduct = () => {
               <div className="p-3 overflow-hidden">
                 <input
                   onClick={() => handleSizeChange("L")}
-                  className={`p-3 overflow-hidden w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 ${
+                  className={`p-3 overflow-hidden ${
                     size ? "disabled-size" : ""
                   }`}
                   type="radio"
@@ -127,7 +115,7 @@ const Singleproduct = () => {
               <div className="p-3 overflow-hidden">
                 <input
                   onClick={() => handleSizeChange("XL")}
-                  className={`p-3 overflow-hidden w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 ${
+                  className={`p-3 overflow-hidden ${
                     size ? "disabled-size" : ""
                   }`}
                   type="radio"
