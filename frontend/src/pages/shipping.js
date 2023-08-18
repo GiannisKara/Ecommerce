@@ -101,11 +101,11 @@ const ShippingInfo = () => {
   };
 
   return (
-    <div className="mx-auto p-4">
-      <h2 className="text-2xl font-semibold mb-4">Shipping Information</h2>
+    <div className="mx-auto p-4 min-h-screen min-w-screen bg-gradient-to-r from-violet-200 to-violet-400  lg:p-20 text-center">
+      <h2 className="text-[30px] text-violet-50 font-semibold mb-4">Shipping Information</h2>
       <div className="mb-6">
-        <h3 className="text-lg font-medium">Hello, {name}!</h3>
-        <p className="text-gray-600">
+        <h3 className="text-[25px] text-violet-50 font-medium">Hello, {name}!</h3>
+        <p className="text-violet-50 text-[20px]">
           Please review your shipping information:
         </p>
         <form action="POST">
@@ -114,7 +114,7 @@ const ShippingInfo = () => {
               name="FullName"
               value={input.FullName}
               onChange={handleChange}
-              className="resize-none m-3 border-2 border-violet-700 rounded-xl focus:outline-violet-50 focus:border-violet-50 h-10 overflow-hidden align-top"
+              className="resize-none m-3 border-2 border-violet-700 rounded-xl focus:outline-violet-50 focus:border-violet-50 h-10 overflow-hidden align-top focus:outline-none focus:ring focus:ring-violet-600"
               type="Fullname"
               placeholder="Full name"
               required
@@ -123,7 +123,7 @@ const ShippingInfo = () => {
               name="HomeAddress"
               value={input.HomeAddress}
               onChange={handleChange}
-              className="resize-none m-3 border-2 border-violet-700 rounded-xl focus:outline-violet-50 focus:border-violet-50 h-10 overflow-hidden align-top"
+              className="resize-none m-3 border-2 border-violet-700 rounded-xl focus:outline-violet-50 focus:border-violet-50 h-10 overflow-hidden align-top focus:outline-none focus:ring focus:ring-violet-600"
               type="HomeAddress"
               placeholder="Home Address"
               required
@@ -132,7 +132,7 @@ const ShippingInfo = () => {
               name="City"
               value={input.City}
               onChange={handleChange}
-              className="resize-none m-3 border-2 border-violet-700 rounded-xl focus:outline-violet-50 focus:border-violet-50 h-10 overflow-hidden align-top"
+              className="resize-none m-3 border-2 border-violet-700 rounded-xl focus:outline-violet-50 focus:border-violet-50 h-10 overflow-hidden align-top focus:outline-none focus:ring focus:ring-violet-600"
               type="City "
               placeholder="City"
               required
@@ -141,7 +141,7 @@ const ShippingInfo = () => {
               name="Area"
               value={input.Area}
               onChange={handleChange}
-              className="resize-none m-3 border-2 border-violet-700 rounded-xl focus:outline-violet-50 focus:border-violet-50 h-10 overflow-hidden align-top"
+              className="resize-none m-3 border-2 border-violet-700 rounded-xl focus:outline-violet-50 focus:border-violet-50 h-10 overflow-hidden align-top focus:outline-none focus:ring focus:ring-violet-600"
               type="Area "
               placeholder="Area"
               required
@@ -150,7 +150,7 @@ const ShippingInfo = () => {
               name="ZIPcode"
               value={input.ZIPcode}
               onChange={handleChange}
-              className="resize-none m-3 border-2 border-violet-700 rounded-xl focus:outline-violet-50 focus:border-violet-50 h-10 overflow-hidden align-top"
+              className="resize-none m-3 border-2 border-violet-700 rounded-xl focus:outline-violet-50 focus:border-violet-50 h-10 overflow-hidden align-top focus:outline-none focus:ring focus:ring-violet-600"
               type="ZIPcode"
               placeholder="ZIP code"
               required
@@ -160,7 +160,7 @@ const ShippingInfo = () => {
                 name="Description"
                 value={input.Description}
                 onChange={handleChange}
-                className="resize-none m-3 border-2 border-violet-700 rounded-xl focus:outline-violet-50 focus:border-violet-50 overflow-x-hidden align-top w-[70%] h-[10rem] mx-auto"
+                className="resize-none m-3 border-2 border-violet-700 rounded-xl focus:outline-violet-50 focus:border-violet-50 overflow-x-hidden align-top w-[70%] h-[10rem] mx-auto focus:outline-none focus:ring focus:ring-violet-600"
                 type="Description"
                 placeholder="Specify unique shipping details if they exisit"
               ></textarea>
@@ -171,20 +171,20 @@ const ShippingInfo = () => {
                 onChange={(e) => {
                   setCategory(e.target.value);
                 }}
-                className="m-3 text-center w-[30%] mx-auto"
+                className="m-3 text-center w-[30%] mx-auto focus:outline-none "
               >
-                <option value="Credit Card-Sripe">Credit Card-Sripe</option>
+                <option  value="Credit Card-Sripe">Credit Card-Sripe</option>
                 <option value="Pay on delivery">Pay on delivery</option>
               </select>
             </div>
           </div>
-        </form>
+        </form>     
       </div>
       <div className="mb-6">
         <h3 className="text-lg font-medium">Products in Your Cart:</h3>
         {cart.items.map((item) => (
-          <div key={item.id} className="flex items-center mt-2">
-            <div className="mr-2">
+          <div key={item.id} className="flex items-center justify-center mt-2 ">
+            <div className="mr-2  ">
               <img
                 src={`http://localhost:5050/images/${item.productData.image}`}
                 alt={item.productData.name}
@@ -206,7 +206,7 @@ const ShippingInfo = () => {
       <div>
         <Link
           onClick={payment}
-          className="inline-block bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300"
+          className="inline-block border-2 border-violet-50 bg-violet-600 text-violet-50 text-[18px] px-4 py-2 rounded-lg transition ease-in-out delay-0 hover:bg-violet-900 duration-500"
         >
           Proceed to Payment
         </Link>
