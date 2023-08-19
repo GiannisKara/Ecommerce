@@ -1,9 +1,15 @@
 import { Link } from "react-router-dom";
-
 import lotus from "../images/lotus.png";
 import jeans from "../images/jeans.png";
 import tshirt from "../images/nike blue t-shirt.png";
 import shoes from "../images/jordan1.png";
+import Carousel from "../components/Carousel";
+
+const slides =[
+  "../images/jeans.png",
+  "../images/nike blue t-shirt.png",
+  "../images/jordan1.png"
+]
 
 const Home = () => {
   return (
@@ -64,6 +70,12 @@ const Home = () => {
             alt=""
           ></img>
         </Link>
+      </div>
+      <div className="max-w-lg">
+      <Carousel slides={slides.map((s) => {
+           <img src={s} />})}   /> 
+           
+     
       </div>
     </div>
   );

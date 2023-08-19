@@ -72,10 +72,11 @@ const Topnav = () => {
             )}
             {logggedIn && (
               <h1 className=" text-violet-50 flex flex-row ">
-                Welcome {name}
+               <div className="flex"> 
+               Logged-In 
                 <span>
                   {" "}
-                  <button onClick={logout}>Logout</button>
+                 
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     height="0.7em"
@@ -87,6 +88,9 @@ const Topnav = () => {
                     />
                   </svg>{" "}
                 </span>
+                </div>
+                <span>/</span>
+                <button className="transition delay-0 hover:text-violet-600 duration-500" onClick={logout}>Logout</button>
               </h1>
             )}
           </div>

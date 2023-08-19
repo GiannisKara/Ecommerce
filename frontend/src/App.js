@@ -15,6 +15,7 @@ import JeansList from "./pages/JeansList";
 import ProductDetail from "./ProductStore";
 import ShippingInfo from "./pages/shipping";
 import Success from "./pages/Success";
+
 function App() {
   return (
     <div className="App">
@@ -28,8 +29,7 @@ function App() {
             <Route
               path="/pages/shippinginfo"
               element={<ShippingInfo />}
-            ></Route>
-
+            ></Route>            
             <Route path="/products/:_id" element={<Singleproduct />} />
             <Route path="/pages/Create" element={<Create />}></Route>
             <Route path="/pages/Dashboard" element={<Dashboard />} />

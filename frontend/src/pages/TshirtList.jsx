@@ -36,21 +36,22 @@ const TshirtList = () => {
       <ProductList
         products={products.filter((product) => product.Category === "Tshirt")}
       />
-      <div className="m-10 border mx-auto text-center">
+      <div className="m-10 mx-auto text-center">
         <button
           disabled={page === 1}
           onClick={handlePrevious}
-          className="m-2"
+          className="m-5 text-violet-50 text-[20px] transition ease-in-out hover:text-violet-600 duration-500"
           style={{ opacity: page === 1 ? 0.5 : 1 }}
         >
           Previous
         </button>
-        <span>{page}</span>
-        <span className="text-violet-50 text-[50px]">{pageCount}</span>
+        <span className="text-violet-50 text-[20px]">{page}</span>
+        <span className="text-violet-50 text-[20px]">/</span>
+        <span className="text-violet-50 text-[20px]">{pageCount}</span>
         <button
           disabled={page === pageCount}
           onClick={handleNext}
-          className="m-2"
+          className="m-5 text-violet-50 text-[20px] transition ease-in-out hover:text-violet-600 duration-500"
           style={{ opacity: page === pageCount ? 0.5 : 1 }}
         >
           Next

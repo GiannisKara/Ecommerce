@@ -28,10 +28,10 @@ const ProductList = ({ products }) => {
   }
 
   return (
-    <div className="grid grid-cols-1  md:grid-cols-3 lg:grid-cols-3 m-5 text-center">
+    <div className="grid grid-cols-1  md:grid-cols-3 lg:grid-cols-3 m-5 lg:ml-10 text-center w-screen ">
       {products.map((product) => (
         <div
-          className="m-3 p-5 w-[20rem] lg:w-[30rem] h-[max-content]"
+          className="m-3 p-5 w-[20rem] lg:w-[30rem] h-[max-content]  transition-ease-in-out delay-0 hover:transform hover:scale-95 duration-500"
           key={product._id}
         >
           <Link to={`/products/${product._id}`}>
