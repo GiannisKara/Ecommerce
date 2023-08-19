@@ -46,17 +46,25 @@ exports.createProduct = (req, res) => {
 
 // Controller for getting all products
 exports.getAllProducts = async (req, res) => {
-  try {
-    const page = parseInt(req.query.page) || 1; // Parse page as integer
-    const itemsPerPage = 3; // Define items per page
-    const category = req.query.category;
-    const query = category ? { Category: category } : {};
+  const page = parseInt(req.query.page) || 1;
+  const category = req.query.category;
+  const sort = req.query.sort; // Get the sorting parameter
+  const direction = req.query.direction || "asc"; // Get the direction parameter
 
+  const query = category ? { Category: category } : {};
+  try {
     const count = await Product.countDocuments(query);
-    const items = await Product.find(query)
+    const itemsPerPage = 3;
+
+    let queryBuilder = Product.find(query)
       .skip((page - 1) * itemsPerPage)
       .limit(itemsPerPage);
 
+    if (sort) {
+      queryBuilder = queryBuilder.sort({ [sort]: direction }); // Apply sorting and direction
+    }
+
+    const items = await queryBuilder.exec();
     const pageCount = Math.ceil(count / itemsPerPage);
 
     res.json({

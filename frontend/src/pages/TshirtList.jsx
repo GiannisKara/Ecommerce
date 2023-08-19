@@ -1,16 +1,24 @@
-import ProductList from "../components/ProductList";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Filters from "../components/Filter";
+import ProductList from "../components/ProductList";
 
-const TshirtList = () => {
+const JeanstList = () => {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
+  const [sortByPrice, setSortByPrice] = useState(false);
+  const [sortDirection, setSortDirection] = useState("asc");
 
   useEffect(() => {
+    let apiUrl = `http://localhost:5050/allproducts?page=${page}&category=Tshirt`;
+
+    if (sortByPrice) {
+      apiUrl += `&sort=Price&direction=${sortDirection}`;
+    }
+
     axios
-      .get(`http://localhost:5050/allproducts?page=${page}&category=Tshirt`)
+      .get(apiUrl)
       .then((res) => {
         if (res.data && res.data.items && res.data.pagination) {
           setProducts(res.data.items);
@@ -20,7 +28,7 @@ const TshirtList = () => {
         }
       })
       .catch((err) => console.log(err));
-  }, [page]);
+  }, [page, sortByPrice, sortDirection]);
 
   const handlePrevious = () => {
     setPage((p) => (p === 1 ? p : p - 1));
@@ -30,13 +38,33 @@ const TshirtList = () => {
     setPage((p) => (p === pageCount ? p : p + 1));
   };
 
+  const toggleSortByPrice = () => {
+    setSortByPrice((prev) => !prev);
+  };
+
+  const toggleSortDirection = () => {
+    setSortDirection((prev) => (prev === "asc" ? "desc" : "asc"));
+  };
+
   return (
     <div className="bg-gradient-to-r from-violet-200 to-violet-400 min-h-screen min-w-screen">
       <Filters />
       <ProductList
         products={products.filter((product) => product.Category === "Tshirt")}
       />
-      <div className="m-10 mx-auto text-center">
+      <div className=" mt-[100px] mx-auto text-center ">
+        <button
+          onClick={toggleSortByPrice}
+          className="m-5 text-violet-50 text-[20px] transition ease-in-out hover:text-violet-600 duration-500"
+        >
+          Sort by Price
+        </button>
+        <button
+          onClick={toggleSortDirection}
+          className="m-5 text-violet-50 text-[20px] transition ease-in-out hover:text-violet-600 duration-500"
+        >
+          {sortDirection === "asc" ? "Sort Ascending" : "Sort Descending"}
+        </button>
         <button
           disabled={page === 1}
           onClick={handlePrevious}
@@ -61,4 +89,4 @@ const TshirtList = () => {
   );
 };
 
-export default TshirtList;
+export default JeanstList;
