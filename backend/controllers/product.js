@@ -75,9 +75,20 @@ exports.getAllProducts = async (req, res) => {
 //Controller for deleting a product
 
 exports.deleteProduct = (req, res) => {
-  Product.findByIdAndDelete({ _id: req.params.id })
-    .then((doc) => console.log(doc))
-    .catch((err) => console.log(err));
+  const productId = req.params._id;
+  Product.findByIdAndDelete(productId)
+    .then((doc) => {
+      if (!doc) {
+        // Product not found
+        return res.status(404).json({ error: "Product not found" });
+      }
+      // Product successfully deleted
+      res.status(200).json({ message: "Product deleted successfully" });
+    })
+    .catch((err) => {
+      // Handle any error that occurs during deletion
+      res.status(500).json({ error: "An error occurred" });
+    });
 };
 
 exports.getSingleProduct = (req, res) => {

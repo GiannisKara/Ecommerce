@@ -1,4 +1,3 @@
-//REQUIRES
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -9,14 +8,15 @@ const users = require("./routes/user");
 const auth = require("./routes/auth");
 const product = require("./routes/product");
 const ordersRoute = require("./routes/order");
-//APP DEPENTENCES
+
 app.use(
   cors({
     origin: ["http://localhost:3000"],
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "DELETE"],
     credentials: true,
   })
 );
+
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -24,7 +24,6 @@ app.use(cookieParser());
 app.use(users);
 app.use(auth);
 app.use(product);
-
 app.use(ordersRoute);
 // Stripe Connect
 const stripe = require("stripe")(process.env.STRIPE_URI);

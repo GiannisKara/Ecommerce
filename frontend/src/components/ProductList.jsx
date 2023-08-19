@@ -5,27 +5,27 @@ import { useState } from "react";
 const ProductList = ({ products }) => {
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
-
+  const userRole = localStorage.getItem("ROLE");
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:5050/allproducts?page=${page}/${id}`)
+      .delete(`http://localhost:5050/allproducts/${id}`)
+      .then(() => {})
       .catch((err) => console.log(err));
-    window.location.reload();
   };
 
   const handlePrevious = () => {
-    setPage((p)=> {
-      if(p === 1 ) return p;
-      return p-1;
+    setPage((p) => {
+      if (p === 1) return p;
+      return p - 1;
     });
-  }
+  };
 
   const handleNext = () => {
     setPage((p) => {
       if (p === pageCount) return p;
-      return p + 1; 
+      return p + 1;
     });
-  }
+  };
 
   return (
     <div className="grid grid-cols-1  md:grid-cols-3 lg:grid-cols-3 m-5 lg:ml-10 text-center w-screen ">
@@ -41,13 +41,19 @@ const ProductList = ({ products }) => {
               alt={product.Name}
             />
             <h2 className="text-[30px] mt-5">{product.Name}</h2>
-            <h3> ${product.Price} </h3>
+            <h3>${product.Price}</h3>
           </Link>
-          {/*<button className="border border-red-700" onClick={() => handleDelete(product._id)}>Delete</button>*/}
-          
+          {userRole === "admin" && (
+            <button
+              className="border border-red-700"
+              onClick={() => handleDelete(product._id)}
+            >
+              Delete
+            </button>
+          )}
         </div>
       ))}
-       {/*<div className="m-10   border mx-auto">
+      {/*<div className="m-10   border mx-auto">
         
         <button disabled={page === 1} onClick={handlePrevious} className="m-2">Previous</button> 
         <button disabled={page === pageCount} onClick={handleNext} className="m-2">Next</button>

@@ -36,7 +36,7 @@ const TshirtList = () => {
       <ProductList
         products={products.filter((product) => product.Category === "Jean")}
       />
-        <div className=" mt-[100px] mx-auto text-center ">
+      <div className=" mt-[100px] mx-auto text-center ">
         <button
           disabled={page === 1}
           onClick={handlePrevious}

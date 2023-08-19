@@ -16,6 +16,7 @@ const Login = () => {
         if (res.data.status === "OK") {
           localStorage.setItem("NAME", res.data.name);
           localStorage.setItem("EMAIL", res.data.email);
+          localStorage.setItem("ROLE", res.data.role);
           if (res.data.role === "admin") {
             navigate("/pages/Dashboard");
           } else {
