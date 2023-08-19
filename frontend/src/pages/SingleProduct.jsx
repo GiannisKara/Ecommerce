@@ -129,12 +129,7 @@ const Singleproduct = () => {
               </div>
             </div>
 
-            <div
-              key={product.id}
-              _id
-              disabled={size}
-              onChange={handleSizeChange}
-            >
+            <div key={product.id} disabled={size} onChange={handleSizeChange}>
               <ProductCard product={product} />
             </div>
           </div>

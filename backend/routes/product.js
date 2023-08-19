@@ -11,7 +11,6 @@ router.post(
 );
 
 // Route for getting all products
-const ITEMS_PER_PAGE = 1;
 
 router.get("/allproducts", productController.getAllProducts);
 

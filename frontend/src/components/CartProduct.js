@@ -3,7 +3,7 @@ import React from "react";
 function CartProduct(props) {
   const { id, quantity, onRemove, productData } = props;
 
-  const size = localStorage.getItem(`SIZE_${id}`); // Use 'productId' to get the correct size
+  const size = localStorage.getItem(`SIZE_${id}`);
   if (!productData) {
     return null; // or a loading state, error message, etc.
   }

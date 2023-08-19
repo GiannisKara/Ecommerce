@@ -47,11 +47,11 @@ exports.createProduct = (req, res) => {
 exports.getAllProducts = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1; // Parse page as integer
-    const itemsPerPage = 1; // Define items per page
+    const itemsPerPage = 2; // Define items per page
+    const category = req.query.category;
+    const query = category ? { Category: category } : {};
 
-    const query = {}; // You can add filters here if needed
-
-    const count = await Product.estimatedDocumentCount(query);
+    const count = await Product.countDocuments(query);
     const items = await Product.find(query)
       .skip((page - 1) * itemsPerPage)
       .limit(itemsPerPage);

@@ -10,9 +10,8 @@ const TshirtList = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5050/allproducts?page=${page}`)
+      .get(`http://localhost:5050/allproducts?page=${page}&category=Tshirt`)
       .then((res) => {
-        console.log("Response from server:", res.data);
         if (res.data && res.data.items && res.data.pagination) {
           setProducts(res.data.items);
           setPageCount(res.data.pagination.pageCount);

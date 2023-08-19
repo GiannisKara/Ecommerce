@@ -11,7 +11,7 @@ const ShippingInfo = () => {
   }
   const cart = useContext(CartContext);
 
-  const [Category, setCategory] = useState("Credit Card-Stripe");
+  const [Payment, setPayment] = useState("Credit Card-Stripe");
   const [input, setInput] = useState({
     FullName: "",
     HomeAddress: "",
@@ -19,7 +19,7 @@ const ShippingInfo = () => {
     Area: "",
     ZIPcode: "",
     Description: "",
-    Category: "",
+    Payment: "",
   });
 
   const handleChange = (e) => {
@@ -52,7 +52,7 @@ const ShippingInfo = () => {
       Area: input.Area,
       ZIPcode: input.ZIPcode,
       Description: input.Description,
-      Category: Category,
+      Payment: Payment,
       userEmail: userEmail,
       items: cart.items.map((item) => ({
         productId: item.productData._id,
@@ -67,7 +67,7 @@ const ShippingInfo = () => {
       .then((response) => {
         console.log(response.data);
 
-        if (Category === "Credit Card-Stripe") {
+        if (Payment === "Credit Card-Stripe") {
           // Proceed to Stripe checkout
           fetch("http://localhost:5050/checkout", {
             method: "POST",
@@ -102,9 +102,13 @@ const ShippingInfo = () => {
 
   return (
     <div className="mx-auto p-4 min-h-screen min-w-screen bg-gradient-to-r from-violet-200 to-violet-400  lg:p-20 text-center">
-      <h2 className="text-[30px] text-violet-50 font-semibold mb-4">Shipping Information</h2>
+      <h2 className="text-[30px] text-violet-50 font-semibold mb-4">
+        Shipping Information
+      </h2>
       <div className="mb-6">
-        <h3 className="text-[25px] text-violet-50 font-medium">Hello, {name}!</h3>
+        <h3 className="text-[25px] text-violet-50 font-medium">
+          Hello, {name}!
+        </h3>
         <p className="text-violet-50 text-[20px]">
           Please review your shipping information:
         </p>
@@ -167,18 +171,18 @@ const ShippingInfo = () => {
             </div>
             <div className="flex flex-col">
               <select
-                value={Category}
+                value={Payment}
                 onChange={(e) => {
-                  setCategory(e.target.value);
+                  setPayment(e.target.value);
                 }}
                 className="m-3 text-center w-[30%] mx-auto focus:outline-none "
               >
-                <option  value="Credit Card-Sripe">Credit Card-Sripe</option>
+                <option value="Credit Card-Sripe">Credit Card-Sripe</option>
                 <option value="Pay on delivery">Pay on delivery</option>
               </select>
             </div>
           </div>
-        </form>     
+        </form>
       </div>
       <div className="mb-6">
         <h3 className="text-lg font-medium">Products in Your Cart:</h3>
@@ -204,6 +208,7 @@ const ShippingInfo = () => {
         ))}
       </div>
       <div>
+        <h1>Total: {cart.getTotalCost().toFixed(2)}</h1>
         <Link
           onClick={payment}
           className="inline-block border-2 border-violet-50 bg-violet-600 text-violet-50 text-[18px] px-4 py-2 rounded-lg transition ease-in-out delay-0 hover:bg-violet-900 duration-500"

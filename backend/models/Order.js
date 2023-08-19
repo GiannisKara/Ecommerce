@@ -7,7 +7,7 @@ const orderSchema = new mongoose.Schema({
   Area: { type: String, required: true },
   ZIPcode: { type: Number, required: true },
   Description: { type: String, required: false },
-  Category: { type: String, required: true },
+  Payment: { type: String, required: true },
   userEmail: { type: String, required: true },
   items: [
     {

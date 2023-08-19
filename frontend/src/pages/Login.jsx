@@ -14,11 +14,11 @@ const Login = () => {
       .post("http://localhost:5050/login", { email, password })
       .then((res) => {
         if (res.data.status === "OK") {
+          localStorage.setItem("NAME", res.data.name);
+          localStorage.setItem("EMAIL", res.data.email);
           if (res.data.role === "admin") {
-            navigate("/Dashboard");
+            navigate("/pages/Dashboard");
           } else {
-            localStorage.setItem("NAME", res.data.name);
-            localStorage.setItem("EMAIL", res.data.email);
             navigate("/");
           }
           return;

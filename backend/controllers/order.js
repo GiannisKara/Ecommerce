@@ -1,5 +1,4 @@
 const Order = require("../models/Order");
-const mongoose = require("mongoose");
 
 exports.createOrder = async (req, res) => {
   const {
@@ -9,7 +8,7 @@ exports.createOrder = async (req, res) => {
     Area,
     ZIPcode,
     Description,
-    Category,
+    Payment,
     userEmail,
     items,
   } = req.body;
@@ -29,7 +28,7 @@ exports.createOrder = async (req, res) => {
       Area,
       ZIPcode,
       Description,
-      Category,
+      Payment,
       userEmail,
       items: items.map((item) => ({
         productId: item.productId,
