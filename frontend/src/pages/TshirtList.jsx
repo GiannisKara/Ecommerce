@@ -31,7 +31,7 @@ const TshirtList = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-violet-200 to-violet-400">
+    <div className="bg-gradient-to-r from-violet-200 to-violet-400 min-h-screen min-w-screen">
       <Filters />
       <ProductList
         products={products.filter((product) => product.Category === "Tshirt")}
