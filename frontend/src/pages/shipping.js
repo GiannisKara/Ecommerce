@@ -55,7 +55,7 @@ const ShippingInfo = () => {
       Payment: Payment,
       userEmail: userEmail,
       items: cart.items.map((item) => ({
-        productId: item.productData._id,
+        productId: item.productData.id,
         productName: item.productData.name,
         size: item.size,
         quantity: item.quantity,
@@ -92,7 +92,7 @@ const ShippingInfo = () => {
             });
         } else {
           navigate("/pages/Success");
-          window.location.reload();
+          //window.location.reload();
         }
       })
       .catch((error) => {
