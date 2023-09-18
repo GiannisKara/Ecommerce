@@ -14,7 +14,7 @@ const JeanstList = () => {
     let apiUrl = `http://localhost:5050/allproducts?page=${page}&category=Jean`;
 
     if (sortByPrice) {
-      apiUrl += `&sort=Price&direction=${sortDirection}`; // Use "Price" instead of "price"
+      apiUrl += `&sort=Price&direction=${sortDirection}`; 
     }
 
     axios

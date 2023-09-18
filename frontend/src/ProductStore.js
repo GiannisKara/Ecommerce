@@ -7,7 +7,7 @@ function useProductData() {
   useEffect(() => {
     const fetchProductFromDatabase = () => {
       axios
-        .get(`http://localhost:5050/allproducts`) // Changed the route to fetch all products
+        .get(`http://localhost:5050/allproducts`) 
         .then((res) => setProductData(res.data))
         .catch((err) => console.log(err));
     };
