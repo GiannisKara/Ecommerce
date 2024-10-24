@@ -7,7 +7,7 @@
   <br>
 </h1>
 
-<h4 align="center">A Full-Stack E-Commerece web Application developed with the MERN stack technologys.</h4>
+<h4 align="center">A Full-Stack E-Commerce web Application developed with the MERN stack technologys.</h4>
 
 <p align="center">
   <a href="https://www.mongodb.com">
